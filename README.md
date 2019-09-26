@@ -1,5 +1,5 @@
 ## 京津冀一卡通， 自助预约脚本
-
+- Python 3.7.4
 1. 克隆项目
 2. cp config.demo.py config.py 修改相应项
 3. 安装requirements.txt中依赖
