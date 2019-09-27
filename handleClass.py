@@ -2,7 +2,7 @@
 __author__ = 'double k'
 
 import requests
-
+import config
 """
 预约
 :keyword 预约
@@ -10,12 +10,19 @@ import requests
 
 
 class Handle:
-    def __init__(self, sessionId, subscribeId, subscribeCalendarId, manInfo, people):
+    def __init__(self,
+                 sessionId,
+                 detailInfo,
+                 people,
+                 date,
+                 info):
         self.sessionId = sessionId
-        self.subscribeId = subscribeId
-        self.subscribeCalendarId = subscribeCalendarId
-        self.manInfo = manInfo
+        self.subscribeId = info['id']
+        self.subscribeCalendarId = date['bookId']
+        self.manInfo = detailInfo['man']
         self.people = people
+        self.date = date
+        self.info = info
 
     def book(self):
         print("开始执行预约操作")
@@ -54,6 +61,12 @@ class Handle:
         print("预约接口返回数据为：", responseData)
         if responseData['status'] in ['1', '4']:
             print(responseData['message'])
+            # 如果bookStatus为True时，推送消息到微信
+            if config.SERVER_CHAN_CONF['is_server_chan'] == True:
+                text = self.info['title'] + "|" + self.date['date'] + "|" + responseData['message']
+                requests.get(
+                    'https://sc.ftqq.com/'+ config.SERVER_CHAN_CONF['secret'] +'.send?text=' + text)
+
             return True
         else:
             print(responseData['message'])

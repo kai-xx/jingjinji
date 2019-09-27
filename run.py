@@ -54,7 +54,7 @@ def worke(select):
         for date in detailInfo['date']:
             # 判断是否为预约日期
             if date['date'] not in select['date']: continue
-            handle = handleClass.Handle(sessionId, info['id'], date['bookId'], detailInfo['man'], people)
+            handle = handleClass.Handle(sessionId, detailInfo, people, date, info)
             bookStatus = handle.book()
             if bookStatus == False:
                 bookTime += 1
