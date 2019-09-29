@@ -15,12 +15,28 @@ password = config.PASSWORD
 sessionId = config.SESSION_ID
 people = config.PEOPLE
 selectData = config.SELECT_DATA
-# 登录操作
-login = loginClass.Login(phone, password, sessionId)
-loginType = login.login()
-if loginType == False:
-    print("结束运行")
-    os._exit(0)
+
+def checkLogin():
+    # 获取登录时间
+    fo = open("login-time")
+    st = fo.read()
+    # 关闭打开的文件
+    fo.close()
+    loginTime = 0 if st == "" else int(st)
+    diff = int(time.time()) - loginTime
+    return True if diff < 7200 and loginTime > 0 else False
+
+if (checkLogin() == False):
+    # 登录操作
+    login = loginClass.Login(phone, password, sessionId)
+    loginType = login.login()
+    if loginType == False:
+        print("结束运行")
+        os._exit(0)
+    fo = open("login-time", "w")
+    fo.write(str(int(time.time())))
+    # 关闭打开的文件
+    fo.close()
 print("登录手机号为：", phone)
 print("预约项，和日期为", selectData)
 
