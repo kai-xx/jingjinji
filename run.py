@@ -79,20 +79,19 @@ def worke(select):
         if bookStatus == False:
             print('休眠', config.BOOK_WAIT, '秒')
             time.sleep(config.BOOK_WAIT)
-
-#  开启线程
-# thres = [Thread(target=worke, args=(t,))
-#             for t in selectData]
-# # 开始执行线程
-# [thr.start() for thr in thres]
-# # 等待线程执行结束
-# [thr.join() for thr in thres]
-
+def tes(t):
+    print(t)
 def main():
-    if len(selectData) > 10:
+    if len(selectData) > 3:
         print("最多可以同时抢十个")
         os._exit(0)
-    for t in selectData:
-        worke(t)
+     # 开启线程
+    thres = [Thread(target=worke, args=(t,))
+                for t in selectData]
+    # 开始执行线程
+    [thr.start() for thr in thres]
+    # 等待线程执行结束
+    [thr.join() for thr in thres]
+
 if __name__ == '__main__':
     main()
