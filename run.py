@@ -41,7 +41,7 @@ def worke(select):
     # 获取详情
     detailType = False
     while (detailType == False):
-        detail = detailClass.Detail(sessionId, info['url'])
+        detail = detailClass.Detail(sessionId, info['url'], select)
         detailInfo = detail.getDetail()
         if len(detailInfo['date']) > 0 :
             detailType = True
@@ -52,8 +52,6 @@ def worke(select):
     bookStatus = False
     while (bookStatus == False):
         for date in detailInfo['date']:
-            # 判断是否为预约日期
-            if date['date'] not in select['date']: continue
             handle = handleClass.Handle(sessionId, detailInfo, people, date, info)
             bookStatus = handle.book()
             if bookStatus == False:

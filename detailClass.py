@@ -4,9 +4,10 @@ __author__ = 'double k'
 import requests
 from bs4 import BeautifulSoup
 class Detail:
-    def __init__(self, sessionId, url):
+    def __init__(self, sessionId, url, select):
         self.sessionId = sessionId
         self.url = url
+        self.select = select
     def getDetail(self):
         print("开始执行获取详情操作")
         headers = {
@@ -61,6 +62,8 @@ class Detail:
             print("日期：", date, "    ", status, "    预约ID为：", bookId)
             if bookId == 0: continue
             if status != "可预约": continue
+            # 判断是否为预约日期
+            if date not in self.select['date']: continue
             dates.append({
                 "date": date,
                 "status": status,
