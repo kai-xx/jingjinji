@@ -26,16 +26,29 @@ class Handle:
 
     def book(self):
         print("开始执行预约操作")
-        data = {
-            'subscribeId': self.subscribeId,
-            'subscribeCalendarId': self.subscribeCalendarId,
-        }
+        # data = {
+        #     'subscribeId': self.subscribeId,
+        #     'subscribeCalendarId': self.subscribeCalendarId,
+        # }
+        # for man in self.manInfo:
+        #     print(man)
+        #     if man['name'] not in self.people: continue
+        #     data['cardNo_' + man['number']] = man['cardNo']
+        #     data['cardType_' + man['number']] = man['cardType']
+        #     data['userIdCard_' + man['number']] = man['userIdCard']
+        #     data['cardId'] = man['cardId']
+        # print(data)
+        data = "?subscribeId={}&subscribeCalendarId={}".format(self.subscribeId, self.subscribeCalendarId)
+        manString = ""
         for man in self.manInfo:
             if man['name'] not in self.people: continue
-            data['cardNo_' + man['number']] = man['cardNo']
-            data['cardType_' + man['number']] = man['cardType']
-            data['userIdCard_' + man['number']] = man['userIdCard']
-            data['cardId'] = man['cardId']
+            manString+="&cardNo_{}={}&cardType_{}={}&userIdCard_{}={}&cardId={}".format(
+                man['number'], man['cardNo'],
+                man['number'], man['cardType'],
+                man['number'], man['userIdCard'],
+                man['cardId']
+            )
+        dataSt = data + manString
         headers = {
             'Host': 'zglynk.com',
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -46,12 +59,11 @@ class Handle:
             'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 12_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/7.0.5(0x17000523) NetType/WIFI Language/zh_CN',
             'Upgrade-Insecure-Requests': '1',
             'Referer': 'http://zglynk.com/ITS/itsApp/goSubscribe.action?subscribeId=' + self.subscribeId,
-            # 'Content-Length': str(len(dataString)),
+            'Content-Length': str(len(dataSt)),
             'Cookie': 'JSESSIONID=' + self.sessionId,
             'Connection': 'keep-alive'
         }
-        response = requests.post('http://zglynk.com/ITS/itsApp/saveUserSubscribeInfo.action',
-                                 data=data,
+        response = requests.post('http://zglynk.com/ITS/itsApp/saveUserSubscribeInfo.action' + dataSt,
                                  headers=headers)
         print("结束执行预约操作，处理返回值")
         if response.status_code != 200:
