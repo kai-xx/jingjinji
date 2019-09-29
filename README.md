@@ -9,5 +9,8 @@
 ---
 
 ## 关于如何获取SESSION_ID
-1. 通过pc端抓包工具，获取header中 ```Cookie: JSESSIONID=xxxxxxxxxxx```
+1. 通过pc端抓包工具，获取header
 2. 通过手机APP抓包工具获取 ```IOS： stream```， android 自行google 百度
+
+## 关于标题问题
+1. 可以先执行一次脚本，列表信息会打印出来，然后复制相应```标题```内容，更改配置，再次运行脚本即可。
