@@ -63,7 +63,7 @@ class Handle:
             print(responseData['message'])
             # 如果bookStatus为True时，推送消息到微信
             if config.SERVER_CHAN_CONF['is_server_chan'] == True:
-                text = self.info['title'] + "|" + self.date['date'] + "|" + responseData['message']
+                text = self.info['title'] + " | " + self.date['date'] + " | " + responseData['message']
                 requests.get(
                     'https://sc.ftqq.com/'+ config.SERVER_CHAN_CONF['secret'] +'.send?text=' + text)
 
