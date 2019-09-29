@@ -10,15 +10,15 @@ class List:
     def getList(self):
         print("开始执行获取列表操作")
         headers = {
-            # 'Host': 'zglynk.com',
+            'Host': 'zglynk.com',
             'Cookie': 'JSESSIONID=' + self.sessionId,
-            # 'Upgrade-Insecure-Requests': '1',
-            # 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            # 'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 12_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/7.0.5(0x17000523) NetType/WIFI Language/zh_CN',
-            # 'Referer': 'http://zglynk.com/ITS/itsApp/goIndex.action',
-            # 'Accept-Language': 'zh-cn',
-            # 'Accept-Encoding': 'gzip, deflate',
-            # 'Connection': 'keep-alive'
+            'Upgrade-Insecure-Requests': '1',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 12_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/7.0.5(0x17000523) NetType/WIFI Language/zh_CN',
+            'Referer': 'http://zglynk.com/ITS/itsApp/goIndex.action',
+            'Accept-Language': 'zh-cn',
+            'Accept-Encoding': 'gzip, deflate',
+            'Connection': 'keep-alive'
         }
         response = requests.get('http://zglynk.com/ITS/itsApp/subscribeList.jsp',
                                 headers=headers)

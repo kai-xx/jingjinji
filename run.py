@@ -7,6 +7,7 @@ import listClass
 import detailClass
 import handleClass
 import time
+import datetime
 import config
 from threading import Thread
 
@@ -62,8 +63,18 @@ def worke(select):
         if len(detailInfo['date']) > 0 :
             detailType = True
         if detailType == False:
-            print('休眠', config.DETAIL_WAIT, '秒')
-            time.sleep(config.DETAIL_WAIT)
+            beginDate = str(datetime.date.today()) + " 06:55:00"
+            begin = int(time.mktime(time.strptime(beginDate, "%Y-%m-%d %H:%M:%S")))
+            endDate = str(datetime.date.today()) + " 07:00:00"
+            end = int(time.mktime(time.strptime(endDate, "%Y-%m-%d %H:%M:%S")))
+            now = int(time.time())
+            if now > begin and now < end:
+                s = end - now - 1
+                print('接近每日七点，休眠', s, '秒')
+                time.sleep(s)
+            else:
+                print('休眠', config.DETAIL_WAIT, '秒')
+                time.sleep(config.DETAIL_WAIT)
     bookTime = 0
     bookStatus = False
     while (bookStatus == False):

@@ -37,18 +37,18 @@ class Handle:
             data['userIdCard_' + man['number']] = man['userIdCard']
             data['cardId'] = man['cardId']
         headers = {
-            # 'Host': 'zglynk.com',
-            # 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            # 'Accept-Encoding': 'gzip, deflate',
-            # 'Accept-Language': 'zh-cn',
-            # 'Content-Type': 'application/x-www-form-urlencoded',
-            # 'Origin': 'http://zglynk.com',
-            # 'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 12_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/7.0.5(0x17000523) NetType/WIFI Language/zh_CN',
-            # 'Upgrade-Insecure-Requests': '1',
-            # 'Referer': 'http://zglynk.com/ITS/itsApp/goSubscribe.action?subscribeId=' + self.subscribeId,
+            'Host': 'zglynk.com',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'Accept-Encoding': 'gzip, deflate',
+            'Accept-Language': 'zh-cn',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Origin': 'http://zglynk.com',
+            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 12_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/7.0.5(0x17000523) NetType/WIFI Language/zh_CN',
+            'Upgrade-Insecure-Requests': '1',
+            'Referer': 'http://zglynk.com/ITS/itsApp/goSubscribe.action?subscribeId=' + self.subscribeId,
             # 'Content-Length': str(len(dataString)),
             'Cookie': 'JSESSIONID=' + self.sessionId,
-            # 'Connection': 'keep-alive'
+            'Connection': 'keep-alive'
         }
         response = requests.post('http://zglynk.com/ITS/itsApp/saveUserSubscribeInfo.action',
                                  data=data,
