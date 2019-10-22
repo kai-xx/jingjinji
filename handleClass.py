@@ -3,6 +3,7 @@ __author__ = 'double k'
 
 import requests
 import config
+import time
 """
 预约
 :keyword 预约
@@ -78,7 +79,14 @@ class Handle:
                 text = self.info['title'] + " | " + self.date['date'] + " | " + responseData['message']
                 requests.get(
                     'https://sc.ftqq.com/'+ config.SERVER_CHAN_CONF['secret'] +'.send?text=' + text)
-
+            fo = open("success.log", "a")
+            s = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " | "
+            + "请求数据为：".join(man) + " | "
+            + "返回数据为：" + responseData['message']
+            fo.write(s)
+            fo.write('\n')
+            # 关闭打开的文件
+            fo.close()
             return True
         else:
             print(responseData['message'])
