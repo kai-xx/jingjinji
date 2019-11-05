@@ -2,3 +2,10 @@
 .git/
 config.py
 success.log
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+venv/
+dist
+build
